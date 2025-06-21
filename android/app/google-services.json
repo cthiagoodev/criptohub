@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "594349362081",
+    "project_id": "criptohub",
+    "storage_bucket": "criptohub.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594349362081:android:770c6739eda064d59d19e0",
+        "android_client_info": {
+          "package_name": "br.com.thiagoodev.criptohub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXixTkgfbSpmJdpirwDjJ4pdoWlr8bvrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
