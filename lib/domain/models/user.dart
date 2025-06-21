@@ -1,11 +1,21 @@
 import 'package:criptohub/domain/utils/deep_equatable.dart';
+import 'package:criptohub/domain/utils/uuid_generator.dart';
 
+/// Represents a user in the application.
 final class User with DeepEquatable {
+  /// The unique identifier of the user.
   final String id;
+  /// The name of the user.
   final String name;
+  /// The email address of the user.
   final String email;
+  /// The phone number of the user.
   final String phone;
 
+  /// Creates a new [User] instance.
+  ///
+  /// Throws an [ArgumentError] if [id], [name], [email], or [phone] are empty.
+  /// Throws a [FormatException] if the [email] is not a valid email format.
   User({
     required this.id,
     required this.name,
@@ -33,6 +43,21 @@ final class User with DeepEquatable {
     }
   }
 
+  /// Creates a new [User] instance with a randomly generated UUID.
+  factory User.autoUuid({
+    required String name,
+    required String email,
+    required String phone,
+  }) {
+    return User(
+      id: UuidGenerator.generateV4(),
+      name: name,
+      email: email,
+      phone: phone,
+    );
+  }
+
+  /// The list of properties used for equality comparison.
   @override
   List<Object?> get props => [
     id,
@@ -41,6 +66,7 @@ final class User with DeepEquatable {
     phone,
   ];
 
+  /// Creates a copy of this [User] but with the given fields replaced with the new values.
   User copyWith({
     String? id,
     String? name,
