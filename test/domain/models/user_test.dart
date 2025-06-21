@@ -106,15 +106,5 @@ void main() {
       expect(user.email, isNot(equals(newUser.email)));
       expect(user.phone, isNot(equals(newUser.phone)));
     });
-
-    test("Must create a new user with automatic id generation", () {
-      final User user = User.autoUuid(
-        name: name,
-        email: email,
-        phone: phone,
-      );
-
-      expect(user.id, isNotEmpty);
-    });
   });
 }

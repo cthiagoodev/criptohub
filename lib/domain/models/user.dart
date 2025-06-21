@@ -1,5 +1,4 @@
 import 'package:criptohub/domain/utils/deep_equatable.dart';
-import 'package:criptohub/domain/utils/uuid_generator.dart';
 
 /// Represents a user in the application.
 final class User with DeepEquatable {
@@ -41,20 +40,6 @@ final class User with DeepEquatable {
     if(phone.isEmpty) {
       throw ArgumentError('Phone cannot be empty');
     }
-  }
-
-  /// Creates a new [User] instance with a randomly generated UUID.
-  factory User.autoUuid({
-    required String name,
-    required String email,
-    required String phone,
-  }) {
-    return User(
-      id: UuidGenerator.generateV4(),
-      name: name,
-      email: email,
-      phone: phone,
-    );
   }
 
   /// The list of properties used for equality comparison.
