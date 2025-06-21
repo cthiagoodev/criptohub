@@ -7,6 +7,6 @@ final class GetUserWithEmailAndPasswordUseCase {
   const GetUserWithEmailAndPasswordUseCase(this._repository);
 
   Future<User> call(String email, String password) async {
-    return await _repository.get(email, password);
+    return await _repository.getWithCredentials(email, password);
   }
 }

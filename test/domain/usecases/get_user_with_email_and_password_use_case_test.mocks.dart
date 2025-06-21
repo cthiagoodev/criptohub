@@ -29,19 +29,19 @@ import 'package:mockito/src/dummies.dart' as _i5;
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRepository extends _i1.Mock implements _i2.UserRepository {
   @override
-  _i3.Future<_i4.User> get(String? email, String? password) =>
+  _i3.Future<_i4.User> getWithCredentials(String? email, String? password) =>
       (super.noSuchMethod(
-            Invocation.method(#get, [email, password]),
+            Invocation.method(#getWithCredentials, [email, password]),
             returnValue: _i3.Future<_i4.User>.value(
               _i5.dummyValue<_i4.User>(
                 this,
-                Invocation.method(#get, [email, password]),
+                Invocation.method(#getWithCredentials, [email, password]),
               ),
             ),
             returnValueForMissingStub: _i3.Future<_i4.User>.value(
               _i5.dummyValue<_i4.User>(
                 this,
-                Invocation.method(#get, [email, password]),
+                Invocation.method(#getWithCredentials, [email, password]),
               ),
             ),
           )

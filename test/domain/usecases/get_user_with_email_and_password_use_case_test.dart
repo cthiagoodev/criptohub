@@ -53,14 +53,14 @@ void main() {
         phone: newPhone,
       );
 
-      when(mockUserRepository.get(email, password))
+      when(mockUserRepository.getWithCredentials(email, password))
           .thenAnswer((_) async => user);
 
       final User result = await getUserWithEmailAndPasswordUseCase.call(email, password);
 
       expect(result.email, equals(email));
 
-      verify(mockUserRepository.get(email, password)).called(1);
+      verify(mockUserRepository.getWithCredentials(email, password)).called(1);
       verifyNoMoreInteractions(mockUserRepository);
     });
   });
