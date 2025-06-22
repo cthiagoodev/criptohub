@@ -63,5 +63,9 @@ void main() {
       verify(mockUserRepository.getWithCredentials(email, password)).called(1);
       verifyNoMoreInteractions(mockUserRepository);
     });
+
+    test("Must return a exception on not found a user", () async {
+
+    });
   });
 }
