@@ -13,9 +13,17 @@ final class GetUserWithEmailAndPasswordUseCase {
       final formattedEmail = email.trim();
       final formattedPassword = password.trim();
 
-      if(formattedEmail.isEmpty) throw AttributeEmptyException("Email cannot be empty");
-      if(!formattedEmail.contains("@")) throw AttributeUnformattedException("Invalid email format");
-      if(formattedPassword.isEmpty) throw AttributeEmptyException("Password cannot be empty");
+      if(formattedEmail.isEmpty) {
+        throw AttributeEmptyException("Email cannot be empty");
+      }
+
+      if(!formattedEmail.contains("@")) {
+        throw AttributeUnformattedException("Invalid email format");
+      }
+
+      if(formattedPassword.isEmpty) {
+        throw AttributeEmptyException("Password cannot be empty");
+      }
 
       final User user = await _repository.getWithCredentials(formattedEmail, formattedPassword);
       return Result.success(user);
