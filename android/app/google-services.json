@@ -12,7 +12,12 @@
           "package_name": "br.com.thiagoodev.criptohub"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "594349362081-9p2mjhgebspsvsi7ntv6ujdmb4mt4c6u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAXixTkgfbSpmJdpirwDjJ4pdoWlr8bvrI"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594349362081-9p2mjhgebspsvsi7ntv6ujdmb4mt4c6u.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "594349362081-ukdvc1hh0cmdf8sa39u7ntnfuj42uj9u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.thiagoodev.criptohub"
+              }
+            }
+          ]
         }
       }
     }

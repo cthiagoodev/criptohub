@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '594349362081',
     projectId: 'criptohub',
     storageBucket: 'criptohub.firebasestorage.app',
+    iosClientId: '594349362081-ukdvc1hh0cmdf8sa39u7ntnfuj42uj9u.apps.googleusercontent.com',
     iosBundleId: 'br.com.thiagoodev.criptohub',
   );
+
 }
