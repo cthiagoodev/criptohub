@@ -1,3 +1,5 @@
+import 'package:criptohub/domain/exceptions/http_exceptions.dart';
+import 'package:criptohub/domain/models/result.dart';
 import 'package:criptohub/domain/models/user.dart';
 import 'package:criptohub/domain/repositories/user_repository.dart';
 import 'package:criptohub/domain/usecases/get_user_with_email_and_password_use_case.dart';
@@ -56,16 +58,104 @@ void main() {
       when(mockUserRepository.getWithCredentials(email, password))
           .thenAnswer((_) async => user);
 
-      final User result = await getUserWithEmailAndPasswordUseCase.call(email, password);
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call(email, password);
 
-      expect(result.email, equals(email));
+      expect(result.isSuccess, isTrue);
+      expect(result.data, isNotNull);
+      expect(result.data?.email, equals(email));
 
       verify(mockUserRepository.getWithCredentials(email, password)).called(1);
       verifyNoMoreInteractions(mockUserRepository);
     });
 
-    test("Must return a exception on not found a user", () async {
+    test("Must validate if email is not empty", () async {
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call("", password);
 
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verifyNever(mockUserRepository.getWithCredentials(any, any));
+      verifyNoMoreInteractions(mockUserRepository);
+    });
+
+    test("Must validate if the email is valid", () async {
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call("tester.email.com", password);
+
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verifyNever(mockUserRepository.getWithCredentials(any, any));
+      verifyNoMoreInteractions(mockUserRepository);
+    });
+
+    test("Must validate if the email is made up of only blank spaces", () async {
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call("      ", password);
+
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verifyNever(mockUserRepository.getWithCredentials(any, any));
+      verifyNoMoreInteractions(mockUserRepository);
+    });
+
+    test("Must validate if password is not empty", () async {
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call(email, "");
+
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verifyNever(mockUserRepository.getWithCredentials(any, any));
+      verifyNoMoreInteractions(mockUserRepository);
+    });
+
+    test("Must validate if the password is made up of only blank spaces", () async {
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call(email, "      ");
+
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verifyNever(mockUserRepository.getWithCredentials(any, any));
+      verifyNoMoreInteractions(mockUserRepository);
+    });
+
+    test("Must return a exception on not found a user", () async {
+      when(mockUserRepository.getWithCredentials(email, password))
+          .thenThrow(HttpNotFountException("User not exists"));
+
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call(email, password);
+
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verify(mockUserRepository.getWithCredentials(email, password)).called(1);
+      verifyNoMoreInteractions(mockUserRepository);
+    });
+
+    test("Must return a exception incorrect credentials a user", () async {
+      when(mockUserRepository.getWithCredentials(email, password))
+          .thenThrow(HttpUnauthorizedException("Incorrect credentials"));
+
+      final Result<User> result = await getUserWithEmailAndPasswordUseCase.call(email, password);
+
+      expect(result.isError, isTrue);
+      expect(result.error, isNotNull);
+      expect(result.error, isA<Exception>());
+      expect(result.errorMessage, isNotEmpty);
+
+      verify(mockUserRepository.getWithCredentials(email, password)).called(1);
+      verifyNoMoreInteractions(mockUserRepository);
     });
   });
 }

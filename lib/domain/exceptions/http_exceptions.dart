@@ -14,6 +14,14 @@ final class HttpUnauthorizedException implements Exception {
   const HttpUnauthorizedException([this.errorMessage = "Unauthorized"]);
 }
 
+/// Exception for when the server understood the request but refuses to fulfill it.
+final class HttpNotFountException implements Exception {
+  final String errorMessage;
+  final int statusCode = 404;
+
+  const HttpNotFountException([this.errorMessage = "Not Found"]);
+}
+
 /// Exception for when the server understood the request but refuses to authorize it.
 final class HttpForbiddenException implements Exception {
   final String errorMessage;
